@@ -1,0 +1,31 @@
+float  a = 0;  
+ArrayList<Box> sponge; 
+void setup() {
+  size(900, 600, P3D);
+  sponge = new ArrayList<Box>(); 
+  Box b = new Box(30,20,0,200);
+  sponge.add(b); 
+}
+void mousePressed() {
+   ArrayList<Box> next = new ArrayList<Box>(); 
+   for (Box b : sponge) {
+      ArrayList<Box> newBoxes = b.generate();
+      next.addAll(newBoxes);
+   }
+   sponge = next; 
+}
+ void draw() {
+
+  background(0);
+  stroke(255);
+  noFill();
+  lights();
+  translate(width/2, height/2);
+  rotateX(a * 0.7);
+  rotateY(a*0.4);
+  rotateZ(a*0.3);
+  for (Box b : sponge) {
+    b.show();
+  }
+  a += 0.01;
+}
